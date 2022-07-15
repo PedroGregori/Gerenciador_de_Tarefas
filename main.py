@@ -17,14 +17,17 @@ while op != 5:
         descricao = input("Descrição da tarefa: ")
         data = input("Data: ")
         status = int(input("Status [0] pendente, [1] concluída: "))
-
+        if status == 1:
+            stts = 'concluída'
+        elif status == 0:
+            stts = 'pendente'
+        
         tarefa = {
             'descricao': descricao,
             'data': data,
-            'status': status
+            'status': stts
         }
         task_lst.append(tarefa)
-
         print("\nTarefa:")
         for chave, valor in tarefa.items():
             print(f'{chave} = {valor}')
@@ -33,17 +36,25 @@ while op != 5:
         os.system('cls')
     
     if op == 2:
-        task = int(input('Digite o valor correspondente a tarefa que deseja editar:'))
+        os.system('cls')
         for i, t in enumerate(task_lst):
             print('[{0}] - {1}'.format(i, t['descricao']))
+        task = int(input('Digite o valor correspondente a tarefa que deseja editar: '))
+        if task > len(task_lst) and task < len(task_lst):
+            print("Valor inválido!")
         edit = input("Digite a nova tarefa: ")
-        tarefa[task] = edit 
+        tarefa['descricao'] = edit
+        for i, v in enumerate(task_lst):
+            print(i,v)
+            
+        task_lst.append(tarefa)  
     
     if op == 3:
-        task = int(input('Digite o valor correspondente tarefa que deseja excluir:'))
         for i, t in enumerate(task_lst):
             print('[{0}] - {1}'.format(i, t['descricao']))
-
+        task = int(input('Digite o valor correspondente tarefa que deseja excluir:'))
+        if task > len(task_lst) and task < len(task_lst):
+            print("Valor inválido!")
 
         # pegar a o valor digitado pelo usuário 
         # e comparar com o tamanho da lista.
